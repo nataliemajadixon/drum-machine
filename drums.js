@@ -60,8 +60,33 @@ const audioClips = [
 
 
 function App (){
-    return  (<div className="text-center" >this is a test</div>
+    return  (<div className="bg-info min-vh-100 text-white" >
+   <div className="text-center">
+    <h2>Drum Kit</h2>
+    {audioClips.map(clip => {
+        <Pad key={clip.id} clip={clip}/>
+    })}
+   </div>
+   </div>
+   
     )
 }
+
+function Pad({clip}){
+
+    const playSound = () => {
+        const audioTag = document.getElementById(clip.keyTrigger);
+        audioTag.currentTime = 0;
+        audioTag.play();
+    }
+
+    return(
+        <div onClick={playSound} className="btn btn-secondary p-4 m-3">
+            <audio className="clip" id={clip.keyTrigger} src={clip.url} />
+       {clip.keyTrigger}
+        </div>
+    );
+}
+
 
 ReactDOM.render(<App/>, document.getElementById('main'));
